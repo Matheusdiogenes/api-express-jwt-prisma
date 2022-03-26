@@ -1,10 +1,17 @@
+import 'dotenv/config' 
 import express from 'express'
+import { router } from './routes'
 
 const app = express()
 
+app.use(express.json())
+
 app.get('/', (req, res) => {
-  res.send({api: 'api with prisma'})
+  res.send({ api: 'api with prisma' })
 })
 
-const PORT = 3000 || process.env.PORT
-app.listen(PORT)
+app.use(router)
+
+app.listen(process.env.PORT, () => {
+  console.log(`run...`)
+})
